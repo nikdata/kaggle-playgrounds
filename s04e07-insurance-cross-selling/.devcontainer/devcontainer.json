@@ -1,0 +1,46 @@
+{
+    "name": "${localEnv:PROJECT_NAME:kp_insurance}",
+    "build": {
+        "dockerfile": "dockerfile2",
+        "args": {
+            // define arguments to be used by dockerfile during build process
+            "PYTHON_VER":"3.12",
+            "PYTHON_ENV":"kp_insurance",
+            "SETUP_FOLDER":"req"
+        }
+    },
+    "customizations": {
+        "settings": {
+            // Define python path - based on env created in setup_env.sh
+            "python.defaultInterpreterPath": "/opt/${localEnv:PROJECT_A_NAME:kp_insurance}/bin/python",
+            "python.selectInterpreter": "/opt/${localEnv:PROJECT_A_NAME:kp_insurance}/bin/python",
+            // Disable A/B experiments from VSCode
+            "python.experiments.enabled": false,
+            "workbench.enableExperiments": false,
+            "jupyter.experiments.enabled": false,
+            // Enable Ruff for linting
+            "editor.formatOnSaveMode": false,
+            "editor.defaultFormatter": "charliemarsh.ruff"
+        },
+        "vscode": {
+            "extensions": [
+                // Documentation Extensions
+                "purocean.drawio-preview",
+                "redhat.vscode-yaml",
+                "yzhang.markdown-all-in-one",
+                // Docker Supporting Extensions
+                "ms-azuretools.vscode-docker",
+                "ms-vscode-remote.remote-containers",
+                // Python Extensions
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "charliermarsh.ruff",
+                // Github Actions
+                "github.vscode-github-actions"
+            ]
+        }
+    },
+    "runArgs": [
+        "--name", "kp_insurance2"
+    ]
+}

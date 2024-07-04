@@ -1,0 +1,24 @@
+ARG PYTHON_VER
+
+# define base image
+FROM python:${PYTHON_VER}-slim-bookworm
+
+# see devcontainer.json to see argument values
+ARG PYTHON_ENV
+ARG SETUP_FOLDER
+
+ENV PYTHON_ENV=$PYTHON_ENV
+ENV SETUP_FOLDER=$SETUP_FOLDER
+
+# create directory
+RUN mkdir $SETUP_FOLDER
+
+# copy files
+COPY install_linux_updates.sh setup_env.sh requirements.txt /$SETUP_FOLDER/
+
+# setup environment
+RUN bash ./${SETUP_FOLDER}/install_linux_updates.sh
+RUN bash ./${SETUP_FOLDER}/setup_env.sh $PYTHON_ENV $SETUP_FOLDER
+
+# expose port
+EXPOSE 8888

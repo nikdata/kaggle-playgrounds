@@ -1,0 +1,25 @@
+name: kp_insurance
+channels:
+  - conda-forge
+  - default
+dependencies:
+  - python==3.12
+  - pip
+  - pip:
+    - wheel
+    - pandas
+    - numpy
+    - plotly
+    - plotly-express
+    - ipython
+    - ipykernel
+    - ipywidgets
+    - jupyterlab
+    - polars
+    - seaborn
+    - numpy
+    - matplotlib
+    - scikit-learn
+    - xgboost
+    - lightgbm
+    - optuna  

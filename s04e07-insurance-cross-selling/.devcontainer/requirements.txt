@@ -1,0 +1,14 @@
+wheel
+pandas
+plotly
+plotly-express
+ipywidgets
+jupyterlab
+polars
+seaborn
+numpy
+matplotlib
+scikit-learn
+xgboost
+lightgbm
+optuna
