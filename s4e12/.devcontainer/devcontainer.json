@@ -1,0 +1,42 @@
+{
+    "name": "kaggleS4E12",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "PY_VER": "3.12",
+            "PYTHON_ENV": "s4e12",
+            "SETUP_FOLDER": "setup"
+        }
+    },
+    "customizations": {
+        "settings": {
+            // Python settings; The environment value should match the args section above
+            "jupyter.interactiveWindow.textEditor.executeSelection": true,
+            "python.defaultInterpreterPath": "/opt/s4e12/bin/python",
+            "python.selectInterpreter": "/opt/s4e12/bin/python",
+            // Disable A/B experiments from VSCode
+            "python.experiments.enabled": false,
+            "workbench.enableExperiments": false,
+            "jupyter.experiments.enabled": false,
+            // Enable Ruff for linting
+            "editor.formatOnSaveMode": false,
+            "editor.defaultFormatter": "charliemarsh.ruff"
+        },
+        "vscode": {
+            "extensions": [
+                // Python Support
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "ms-toolsai.jupyter-renderers",
+                // Extras
+                "purocean.drawio-preview",
+                "redhat.vscode-yaml",
+                "charliermarsh.ruff",
+                "yzhang.markdown-all-in-one"
+            ]
+        }
+    },
+    "runArgs": [
+        "--name","kaggleS4E12"
+    ]
+}
