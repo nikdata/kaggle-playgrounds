@@ -54,7 +54,26 @@ null_counts \
 # 3 categorical columns with missing data (highest is marital status)
 
 # CHECK: unique values
-raw_combo.group_by(['dataset']).agg([pl.col(col).n_unique().alias(f"{col}") for col in raw_combo.columns if col != 'dataset']).select(pl.exclude('premium_amount')).sort(by = 'dataset', descending=True).transpose(include_header=True, header_name = 'column', column_names = ['unique_train','unique_test']).slice(1)
+raw_combo.group_by(['dataset']).agg([pl.col(col).n_unique().alias(f"{col}") for col in raw_combo.columns if col != 'dataset']).select(pl.exclude('premium_amount')).sort(by = 'dataset', descending=True).transpose(include_header=True, header_name = 'column', column_names = ['unique_train','unique_test']).slice(1).join(pl.DataFrame({'column':raw_combo.columns, 'type':raw_combo.dtypes}), left_on = ['column'], right_on=['column'], how='inner')
 
+
+# PLOTS
+
+def make_plot(df, group, column, plot_type):
+    if(plot_type == 'histogram'):
+        df_plot = df.filter(pl.col('dataset') == group).filter(~pl.col(column).is_null())
+        my_plot = sns.histplot(df_plot, x = column, bins = 25, stat='count').set(title = 'Histogram for ' + column.title(), xlabel = column.title(), ylabel = 'Count')
+        return my_plot
+    else:
+        return None
+
+make_plot(df = raw_combo, group = 'train', column = 'age', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'annual_income', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'number_of_dependents', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'health_score', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'previous_claims', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'vehicle_age', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'credit_score', plot_type = 'histogram')
+make_plot(df = raw_combo, group = 'train', column = 'insurance_duration', plot_type = 'histogram')
 
 
