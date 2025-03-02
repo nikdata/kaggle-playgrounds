@@ -1,19 +1,20 @@
 {
     "name": "${localEnv:PROJECT_NAME:kp_insurance}",
     "build": {
-        "dockerfile": "dockerfile2",
+        "dockerfile": "dockerfile",
         "args": {
             // define arguments to be used by dockerfile during build process
             "PYTHON_VER":"3.12",
             "PYTHON_ENV":"kp_insurance",
-            "SETUP_FOLDER":"req"
+            "SETUP_FOLDER":"req",
+            "PYTHON_PATH":"/opt/${localEnv:PROJECT_NAME:kp_insurance}/bin"
         }
     },
     "customizations": {
         "settings": {
             // Define python path - based on env created in setup_env.sh
-            "python.defaultInterpreterPath": "/opt/${localEnv:PROJECT_A_NAME:kp_insurance}/bin/python",
-            "python.selectInterpreter": "/opt/${localEnv:PROJECT_A_NAME:kp_insurance}/bin/python",
+            "python.defaultInterpreterPath": "/opt/${localEnv:PROJECT_NAME:kp_insurance}/bin/python",
+            "python.selectInterpreter": "/opt/${localEnv:PROJECT_NAME:kp_insurance}/bin/python",
             // Disable A/B experiments from VSCode
             "python.experiments.enabled": false,
             "workbench.enableExperiments": false,
@@ -41,6 +42,6 @@
         }
     },
     "runArgs": [
-        "--name", "kp_insurance2"
+        "--name", "kp_insurance"
     ]
 }

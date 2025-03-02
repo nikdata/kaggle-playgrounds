@@ -27,11 +27,14 @@ EXPOSE 8888
 FROM python:${PYTHON_VER}-slim-bookworm
 
 ARG PYTHON_ENV
+ARG PYTHON_PATH
 
 ENV PYTHON_ENV=$PYTHON_ENV
+ENV PYTHON_PATH=$PYTHON_PATH
 
 COPY --from=builder /opt/${PYTHON_ENV} /opt/${PYTHON_ENV}
 
 # expose port
 EXPOSE 8888
-# ENV PATH="/opt/venv/bin:$PATH"
+
+ENV PATH="${PYTHON_PATH}:$PATH"
